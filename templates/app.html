@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Bank Customer Churn Prediction</title>
+		<!--CSS-->
+		<link rel="stylesheet" href="app.css">
+	
+	
+	  
+</head>
+<body>
+
+<div class="container">
+    <form action="action_page.php">
+	
+	<input id='heading' type="text" value="Bank Customer Churn Prediction">
+	
+	
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" placeholder="Present age of the person..">
+
+      <label for="gender">Gender</label>
+      <select id="gender" name="gender">
+		<option value="--Select Gender--">--Select Gender--</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select> 
+
+      <label for="cscore">Credit Score</label>
+      <input type="number" id="cscore" name="cscore" placeholder="Latest Credit score of the person..">
+  
+      <label for="geography">Geography</label>
+      <select id="geography" name="geography">
+		<option value="--Select Country--">--Select Country--</option>
+        <option value="france">France</option>
+        <option value="spain">Spain</option>
+        <option value="germany">Germany</option>
+      </select>
+
+      <label for="tenure">Tenure</label>
+      <input type="number" id="tenure" name="tenure" placeholder="Tenure in number of years..">
+	  
+      <label for="hascreditcard">Has Credit Card?</label>
+      <select id="hascreditcard" name="hascreditcard">
+		<option value="--Select--">--Select--</option>
+        <option value="france">Yes</option>
+        <option value="spain">No</option>
+      </select>	  
+	  
+      <label for="isactivemember">Active Member?</label>
+      <select id="isactivemember" name="isactivemember">
+		<option value="--Select--">--Select--</option>
+        <option value="france">Yes</option>
+        <option value="spain">No</option>
+      </select>		  
+
+      <label for="balance">Balance</label>
+      <input type="number" id="balance" name="balance" placeholder="Account Balance">    
+      
+      <label for="nprdcts">Number of Products</label>
+      <input type="number" id="nprdcts" name="nprdcts" placeholder="Total number of financial products given to the person from the bank..">      
+
+      <label for="salary">Estimated Salary</label>
+      <input type="number" id="salary" name="salary" placeholder="Salary of the person">
+
+<!--  <label for="subject">Subject</label>
+      <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+-->  
+      <input id='submit' type="submit" value="Submit">
+	  
+	  <label for="displayValue">Probability of the Customer to Exit is: </label><input type="textbox" id="output" name="display">
+	  
+  
+    </form>
+  </div>
+  
+
+				
+				
+  
+  	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$('#submit').click(function(event){    
+		  event.preventDefault();     
+		  var exist_response = $.ajax({type:"GET",url:"http://127.0.0.1:5000/predict",data:"age="+$('#age').val()+"&gender="+$('#gender').val()+"&cscore="+$('#cscore').val()+
+		  "&geography="+$('#geography').val()+"&tenure="+$('#tenure').val()+"&hascreditcard="+$('#hascreditcard').val()+"&isactivemember="+
+		  $('#isactivemember').val()+"&balance="+$('#balance').val()+"&nprdcts="+$('#nprdcts').val()+"&salary="+$('#salary').val(),async: false}).responseText;
+		  
+		  <!--$('#output').text("Probability of the employee to Exit is : "+ String(parseInt(exist_response)))-->
+		  
+		  document.getElementsByName('display')[0].value= String(exist_response);
+		  
+		});
+	</script>
+  
+  
+  
+</body>
+</html>
